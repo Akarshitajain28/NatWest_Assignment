@@ -31,7 +31,7 @@ public class Homepage extends Basepage {
     		String movie_name =  e.getText();
     		if (movie_name.contains("Conjuring")) {
     			System.out.println(movie_name);
-    			condition = true;	
+    			condition = true;
     		}
     	}
     	return condition;
