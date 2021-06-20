@@ -1,21 +1,23 @@
-Feature: Search and research functionality
+Feature: Searching for movie titles and researching about movie plot and cast
 
-  Scenario: Verifying search results are according to the search value
-        Given User open imdb website on browser
-        When User enter search value in search bar
-        Then User get the related suggestion list
+  Background: Common Steps
+  			Given I open imdb website on browser
+        When I enter search value in search bar
+
+  Scenario Outline: Verifying search results are according to the search value
+        Then I get the related suggestion list according to search value "<Suggestion Value>"
+        Examples:
+        |Suggestion Value|
+        |Conjuring       |
     
 
-	Scenario: Selecting suggestion from suggestions list
-				Given User open imdb website on browser
-        When User enter search value in search bar
-        And User select a suggestion from the suggestion list
-				Then User get navigated to the selected suggestion page
+	Scenario: Selecting suggestion from suggestions list 
+        And I select a suggestion from the suggestion list
+				Then I get navigated to the selected suggestion page
 		
 	Scenario: Verifying the plot details
-				Given User open imdb website on browser
-        When User enter search value in search bar
-        And User select a suggestion from the suggestion list
-				Then User get navigated to the selected suggestion page
-				And User get the plot of the searched value
-				And User get the cast of the searched value
+        And I select a suggestion from the suggestion list
+				Then I get navigated to the selected suggestion page
+				And I get the plot of the searched value
+				And I get the cast of the searched value
+				

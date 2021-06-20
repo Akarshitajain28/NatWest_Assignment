@@ -2,34 +2,33 @@ package main.java.pages;
 
 import java.io.FileNotFoundException;
 import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Homepage extends Basepage {
-    Yamlreader yamlread=new Yamlreader();
+public class HomePage extends BasePage {
+    YamlReader yamlread=new YamlReader();
     @FindBy(id = "suggestion-search")
 	WebElement searchbox;
+    @FindBy(css = "div.searchResults__ResultTextContainer-sc-1pmqwbq-1.khRmvD div")
+    List<WebElement> myElements;
 
-    public Homepage() {
-		PageFactory.initElements(driver, this);
+    public HomePage() {
+	PageFactory.initElements(driver, this);
 	}
     
-    public void submit_search_value() throws FileNotFoundException
+    public void submitSearchValue() throws FileNotFoundException
     {
         searchbox.click();
-        searchbox.sendKeys(yamlread.yamlreader("search value"));
+        searchbox.sendKeys(yamlread.yamlReader("search value"));
     }
     
-    public Boolean verify_suggestion_list()
+    public Boolean verifySuggestionList(String suggestionValue)
     {
     	Boolean condition = false;
-    	List<WebElement> myElements = driver.findElements(By.cssSelector("[class=\"searchResults__ResultTextItem-sc-1pmqwbq-2 lolMki _26kHO_8bFBduUIYADnVHFY\"]"));
     	for(WebElement e : myElements) {
     		String movie_name =  e.getText();
-    		if (movie_name.contains("Conjuring")) {
+    		if (movie_name.contains(suggestionValue)) {
     			System.out.println(movie_name);
     			condition = true;
     		}
@@ -37,13 +36,12 @@ public class Homepage extends Basepage {
     	return condition;
     }
 
-    public void select_suggestion_from_list() {
-    	List<WebElement> myElements = driver.findElements(By.cssSelector("[class=\"searchResults__ResultTextItem-sc-1pmqwbq-2 lolMki _26kHO_8bFBduUIYADnVHFY\"]"));
+    public void selectSuggestionFromList() {
     	for(WebElement e : myElements) {
     		String movie_name =  e.getText();
-    		if (movie_name.equalsIgnoreCase(yamlread.yamlreader("search value"))) {
+    		if (movie_name.equalsIgnoreCase(yamlread.yamlReader("search value"))) {
     			e.click();
-    			System.out.println(movie_name+"is selected");
+    			System.out.println(movie_name+" is selected ");
     			break;
     		}
     	}

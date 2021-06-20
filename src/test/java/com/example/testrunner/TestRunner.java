@@ -5,7 +5,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src\\test\\Features\\movie_search_research.feature", glue= {"com.example.stepdefinition"})
+@CucumberOptions(features = "src\\test\\Features\\movie_search_research.feature", glue= {"com.example.stepdefinition", "main.java.hooks"})
 public class TestRunner {
     
 }

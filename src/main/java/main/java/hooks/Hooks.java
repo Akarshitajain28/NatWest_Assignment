@@ -8,14 +8,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import main.java.pages.Basepage;
+import main.java.pages.BasePage;
 
-public class Hooks extends Basepage{
+public class Hooks extends BasePage{
 	
 	@Before
 	public  void initialization() throws IOException {
 		prop = new Properties(); 
-		FileInputStream file=new FileInputStream(directorypath+"\\src\\test\\resources\\config\\property.properties");
+		FileInputStream file=new FileInputStream(directorypath + "\\src\\test\\resources\\config\\property.properties");
 		prop.load(file);
 		System.out.println(directorypath);
 		String browser_Name = prop.getProperty("browser");
@@ -24,14 +24,15 @@ public class Hooks extends Basepage{
 			System.setProperty("webdriver.chrome.driver", directorypath + "\\src\\test\\resources\\driver\\chromedriver.exe");
 			driver = new ChromeDriver();
 		}
+		System.out.println(prop.getProperty("URL"));
+		driver.get(prop.getProperty("URL"));
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 	}
 	@After
-	public void deriver_close() throws InterruptedException {
-		driver.close();
+	public void driverClose() {
 		driver.quit();
 	}
 
