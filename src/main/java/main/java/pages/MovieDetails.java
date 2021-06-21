@@ -20,7 +20,6 @@ public class MovieDetails extends BasePage
         public boolean getCastList() throws FileNotFoundException
         {
             System.out.println(cast_list.getText());
-//            js.executeScript("arguments[0].scrollIntoView(true);", cast_list);
             if (cast_list.isDisplayed()) {
             return true;
         }
@@ -32,7 +31,6 @@ public class MovieDetails extends BasePage
         public boolean getPlotSummary()
         {
             System.out.println(plot.getText());
-//            js.executeScript("arguments[0].scrollIntoView(true);", plot);
             if (plot.isDisplayed())
             {
                 return true;
